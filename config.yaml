@@ -1,0 +1,6 @@
+db:
+  name: 'tesseract'
+  user: 'postgres'
+  host: '127.0.0.1'
+  password: 'admin'
+  port: '5433'
