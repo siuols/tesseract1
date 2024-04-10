@@ -22,22 +22,22 @@ def main():
 
     if "db_conn" not in st.session_state:
         st.session_state.db_conn = psycopg2.connect(
-            database=config["db"]["name"], 
-            user=config["db"]["user"], 
+            database=config["db"]["name"],
+            user=config["db"]["user"],
             host=config["db"]["host"],
             password=config["db"]["password"],
             port=config["db"]["port"]
         )
         st.session_state.new_session_key = None
-    
+
     chat_container = st.container()
-    
+
     uploaded_pdf = st.sidebar.file_uploader(
         "Upload a pdf file",
         type=["pdf"],
         on_change=toggle_pdf_chat
     )
-    
+
     if uploaded_pdf:
         with st.spinner("Processing pdf..."):
             filename, text = pdf_extract_text(uploaded_pdf.name)
@@ -51,6 +51,6 @@ def main():
                     avatar="chat_icons/bot_image.png"
                 ):
                     st.write(generated_reply)
-    
-if __name__ == "__main__":
-    main()
+st.title("Chat bot")
+#if __name__ == "__main__":
+#    main()

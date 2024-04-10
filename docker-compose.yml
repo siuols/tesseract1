@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  tesseract:
+    build:
+       context: ./
+    container_name: tesseract
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:15-alpine
+    container_name: db_tesseract
+    env_file:
+      - .env-postgres
+    volumes:
+      - postgres_db:/var/lib/postgresql/data/
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    env_file:
+      - .env-pgadmin
+    volumes:
+      - pg_admin:/var/lib/pgadmin
+    ports:
+      - "9267:80"
+    depends_on:
+      - db
+    #restart: always
+
+volumes:
+  postgres_db:
+  pg_admin:
